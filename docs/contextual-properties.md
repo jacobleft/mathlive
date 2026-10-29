@@ -100,6 +100,12 @@ Local checks include the 41-test Chromium physical-keyboard suite, the S03
 scenarios across Chromium/Firefox/WebKit, and the accumulated unit suite of 452
 passing tests and 256 snapshots (two existing TODO).
 
+The
+[full integration workflow](https://github.com/jacobleft/mathlive/actions/runs/40828695543)
+passed on commit `72f38441404d712f55ac93489a31bb1d79fe7898`: all 452 unit tests,
+256 snapshots and 486 browser tests passed, including all 45 S03 cases across
+Chromium, Firefox and WebKit. The browser suite retained 12 existing skips.
+
 The production build and packaged public-declaration consumer check pass. Lint
 has zero errors and two existing unused-import warnings in modified upstream
 files; the build retains eight existing documentation warnings. No dependency or
