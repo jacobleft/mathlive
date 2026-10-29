@@ -105,6 +105,14 @@ Playwright 1.63.0, continuing the S00 toolchain.
 The S01 browser suite against the production build passed all 48 checks: 16
 cases each in Chromium, Firefox and WebKit.
 
+The
+[full GitHub workflow](https://github.com/jacobleft/mathlive/actions/runs/40817004477)
+passed on Node.js 22/Linux for code commit
+`611c310cb64cc136534426b9e81d1bec2ca884c4`: 390 unit tests, 256 snapshots, the
+public declaration check, and 396 browser tests passed. Twelve existing browser
+skips and two unit TODO remain. All 48 S01 browser checks passed in that
+accumulated run. The final production rebuild also succeeded.
+
 Reproduce after building with `npx jest test/ --runInBand`,
 `npx tsc --noEmit --baseUrl ./dist/types ./test/public-ts-declarations/main.ts`
 and `npx playwright test editor-actions.spec.ts --workers=1`. On Windows, place
