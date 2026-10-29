@@ -1,7 +1,8 @@
 > **Development fork:** [jacobleft/mathlive](https://github.com/jacobleft/mathlive)
 > builds toward a full-featured visual equation editor with AxMath-style
-> authoring capabilities. See the [development plan](docs/development-plan.md)
-> and [feature matrix](docs/feature-matrix.md).
+> authoring capabilities. See the [development plan](docs/development-plan.md),
+> [priorities and implementation order](docs/implementation-order.md), and
+> [feature matrix](docs/feature-matrix.md).
 > The current changes are planning documents; the editor implementation is still
 > the upstream baseline. MathML storage and macOS/LibreOffice integration are
 > deferred. Upstream: [arnog/mathlive](https://github.com/arnog/mathlive).

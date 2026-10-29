@@ -5,6 +5,11 @@ Date: 2026-10-29.
 Upstream baseline: MathLive 0.111.1 at
 `8d148b4227ca057fa1aefe89c2149cdcf0591443`.
 
+Execution order: [feature priorities and implementation slices](implementation-order.md).
+Use that queue to choose the next task; the milestones below group the eventual
+deliverables and acceptance gates. Implementation proceeds in increments across
+families rather than completing every template before its editing controls.
+
 ## Product objective
 
 Build a full-featured visual equation editor with the authoring breadth and
@@ -216,16 +221,16 @@ Acceptance: edits match the canvas preview, survive save/reopen, and participate
 in history. Supported visual precision is documented with examples; unimplemented
 positioning or font features are not presented as complete.
 
-### M5 — Make repeated authoring efficient
+### M5 — Complete authoring efficiency and reusable content
 
 Deliverables:
 
 - Favorites, recent templates, reusable formula snippets, and a custom-template
   workflow with previews and editable slots.
-- Clear keyboard shortcuts, selection wrapping, predictable Tab/arrow behavior,
-  context menus, zoom, and focus management.
-- Equation open/save and copy/paste using the existing MathLive representation;
-  preserve authoring-relevant style and layout properties.
+- Complete the shortcut, context-menu, and reuse experience on top of the
+  navigation, focus, history, zoom, and clipboard behavior established in P0.
+- Extend equation open/save and copy/paste coverage to the advanced constructions
+  using the existing MathLive representation; basic preservation is a P0 gate.
 - A basic local formula library with rename/search/preview. Avoid introducing a
   server or account requirement for equation editing.
 
@@ -243,14 +248,17 @@ Deliverables:
   clipboard, incomplete equations, focus changes, and long/nested expressions.
 - Measure interaction/rendering performance on representative small and large
   equations; establish budgets from the measured baseline.
-- Keyboard accessibility and Chinese IME checks on available supported
-  environments. Browser-engine testing does not count as testing every OS.
+- Expanded keyboard accessibility and Chinese IME checks on available supported
+  environments, building on the P0 checks. Browser-engine testing does not count
+  as testing every OS.
 - Reproducible fork build and a documented upstream update procedure.
 
-Acceptance: every required matrix row has passing evidence or a clearly scoped
-release exclusion. No silent content loss is accepted in transformation,
-clipboard, undo/redo, or reopen workflows. Full parity is claimed only against
-the explicitly enumerated comparison catalog.
+Acceptance: full-target qualification requires passing evidence for every
+required matrix row. Earlier beta releases may list unfinished advanced items,
+but those items remain in scope and block full-target qualification. No silent
+content loss is accepted in transformation, clipboard, undo/redo, or reopen
+workflows. Full parity is claimed only against the explicitly enumerated
+comparison catalog.
 
 ## Verification strategy
 
@@ -273,24 +281,26 @@ Do not count symbol definitions, parser acceptance, or successful static
 rendering alone as completed editor features. Matrix evidence is case-specific;
 avoid a single coverage percentage that hides missing interactions.
 
-## Initial implementation queue
+## Prioritized implementation queue
 
-| Order | Task | Done when | Depends on |
-| --- | --- | --- | --- |
-| E01 | Record upstream build/test baseline and fix test exit propagation | Reproducible report; intentional failure reaches CI | Fork |
-| E02 | Extend CI triggers to `development` and add a minimal workbench harness | Branch changes are checked; one editable equation mounts | E01 |
-| E03 | Establish feature catalog, representative fixtures, and evidence reporting | Each required row has examples and separate interaction statuses | E01 |
-| E04 | Implement template catalog and shared insertion/wrapping actions | A selection can be wrapped; slots and one-step undo work | E02, E03 |
-| E05 | Implement palettes and selection-aware contextual panel | Families are discoverable; controls track caret/selection | E04 |
-| E06 | Add missing structure/operator transformations | Existing content survives required variant/property changes | E05 |
-| E07 | Complete matrix, array, separator, and alignment controls | M3 scenarios pass | E05, E06 as needed |
-| E08 | Complete typography, spacing, and layout controls | M4 scenarios pass; unsupported properties are explicit | E05, E06 as needed |
-| E09 | Add favorites, snippets, custom templates, and local equation library | M5 workflows pass | E04, E07, E08 |
-| E10 | Qualify editor beta against the comparison catalog | M6 gates pass and gaps are published | E06–E09 |
+The [implementation-order document](implementation-order.md) replaces the
+initial E01–E10 queue with S00–S19. It specifies the order within every family,
+the first delivery tier of each feature, dependency minima, and concrete
+acceptance examples.
 
-These tasks are planned, not implemented. E07 and E08 may proceed independently
-once their prerequisites are established. No schedule estimate is committed
-before the baseline and gap inventory are measured.
+| Tier | Slices | Delivery |
+| --- | --- | --- |
+| P0 | S00–S08 | Reliable baseline and actions; common templates, contextual properties and transformations; basic matrices, alignment and typography; first-usable-editor gate |
+| P1 | S09–S15 | Broad notation, advanced matrices/alignment, complete common property controls, rich typography, efficient reuse, and the authoring-beta gate |
+| P2 | S16–S19 | Tensors and uncommon constructions, fine positioning, audited fonts, custom templates/library, and full-target qualification |
+
+Dependable editing is required from S01 onward. Basic typography, clipboard,
+reopen, and composition checks are included in P0. They do not wait for the
+completion of all structure or matrix variants. Every new action includes its
+selection, focus, content-preservation, and undo/redo verification.
+
+All tiers remain in scope. These tasks are planned, not implemented. No schedule
+estimate is committed before the baseline and gap inventory are measured.
 
 ## Fork maintenance
 
