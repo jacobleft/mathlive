@@ -57,6 +57,12 @@ documentation is not a downstream source change.
 | Focused checks after server-startup change | Nine passed with automatic exit | Input, history, and keyboard toggle across three engines; test-server teardown completes without manual cleanup |
 | Isolated Chromium clipboard case | Passed with one worker | The Chromium failure from the parallel baseline did not reproduce in isolation |
 | Source types and targeted lint | Passed | Library type check, declaration-consumer check, and lint for the new code; lint project now includes test and example files |
+| GitHub CI, Node.js 22/Linux | Passed: 381 unit tests, two TODO, 348 browser checks, 12 browser skips | Full test pipeline on code commit `9ba8b92d43f175e83b1a2be46092366cfec391be`; [run 40812390936](https://github.com/jacobleft/mathlive/actions/runs/40812390936) |
+
+The CI run was dispatched manually because automatic checks were not observed
+after the initial pushes, despite active workflows. Push/pull-request triggers
+are configured for `development`; the manual trigger also remains available.
+The CI browser count includes the upstream and new workbench suites together.
 
 The browser baseline was collected before adding the new browser test file, so
 its 267 cases are distinct from the 93 new workbench cases. The initial
