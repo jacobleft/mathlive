@@ -1,0 +1,140 @@
+[
+  {
+    "id": "nested-fraction",
+    "features": ["F01"],
+    "latex": "\\frac{1+\\frac{x}{2}}{y}"
+  },
+  {
+    "id": "generalized-fraction",
+    "features": ["F02"],
+    "latex": "\\genfrac{(}{)}{0pt}{}{n}{k}"
+  },
+  {
+    "id": "indexed-radical",
+    "features": ["F03"],
+    "latex": "\\sqrt[3]{x+\\sqrt{y}}"
+  },
+  { "id": "combined-scripts", "features": ["F04"], "latex": "x_i^{n+1}" },
+  {
+    "id": "tensor-prescripts",
+    "features": ["F05"],
+    "latex": "\\prescript{a}{b}{T}_{ij}^{kl}",
+    "gap": "The prescript command is unknown; alternative tensor representations still need investigation (S16)."
+  },
+  {
+    "id": "large-operators",
+    "features": ["F06"],
+    "latex": "\\sum_{i=1}^{n}i+\\prod_{j=1}^{m}j"
+  },
+  {
+    "id": "integrals",
+    "features": ["F07"],
+    "latex": "\\int_0^1 x\\,dx+\\iint_D f\\,dA+\\iiint_V f\\,dV+\\oint_C f\\,dz"
+  },
+  {
+    "id": "directed-integrals",
+    "features": ["F08"],
+    "latex": "\\intclockwise_C f+\\varointclockwise_C f+\\ointctrclockwise_C f+\\oiint_S f+\\oiiint_V f"
+  },
+  {
+    "id": "limit-placement",
+    "features": ["F09"],
+    "latex": "\\sum\\limits_{i=0}^n i+\\int\\nolimits_0^1 f(x)dx"
+  },
+  {
+    "id": "named-functions",
+    "features": ["F10"],
+    "latex": "\\operatorname{rank}(A)+\\sin x"
+  },
+  {
+    "id": "asymmetric-delimiters",
+    "features": ["F11"],
+    "latex": "\\left\\langle x\\middle|y\\right\\rbrace"
+  },
+  {
+    "id": "sized-delimiters",
+    "features": ["F12"],
+    "latex": "\\Bigl(\\frac ab\\Bigr)"
+  },
+  {
+    "id": "accents",
+    "features": ["F13"],
+    "latex": "\\widehat{xy}+\\vec{v}+\\dot{x}+\\overline{z}"
+  },
+  {
+    "id": "labeled-arrow",
+    "features": ["F14"],
+    "latex": "\\xrightarrow[b]{a}"
+  },
+  {
+    "id": "annotations",
+    "features": ["F15"],
+    "latex": "\\underbrace{a+b}_{n}+\\overset{!}{=}"
+  },
+  {
+    "id": "enclosures",
+    "features": ["F16"],
+    "latex": "\\boxed{x}+\\cancel{y}"
+  },
+  {
+    "id": "symbols",
+    "features": ["F17"],
+    "latex": "\\alpha+\\Gamma+\\infty\\neq0"
+  },
+  {
+    "id": "nested-matrix",
+    "features": ["F18", "F19", "F20", "F21", "F26"],
+    "latex": "\\begin{pmatrix}1&\\frac ab\\\\\\sqrt x&y^2\\end{pmatrix}"
+  },
+  {
+    "id": "partitioned-matrix",
+    "features": ["F22"],
+    "latex": "\\begin{array}{c|c}\\hline a&b\\\\\\hline c&d\\end{array}",
+    "gap": "Vertical column separators exist, but the hline command for horizontal rules is unknown (S10)."
+  },
+  {
+    "id": "cases",
+    "features": ["F24"],
+    "latex": "f(x)=\\begin{cases}x^2&x>0\\\\0&x\\le0\\end{cases}"
+  },
+  {
+    "id": "aligned-rows",
+    "features": ["F25"],
+    "latex": "\\begin{aligned}a&=b+c\\\\d&=e+f\\end{aligned}"
+  },
+  {
+    "id": "math-alphabets",
+    "features": ["F27"],
+    "latex": "\\mathrm{H}+\\mathit{x}+\\mathbf{v}+\\mathbb{R}+\\mathcal{F}"
+  },
+  {
+    "id": "text-in-math",
+    "features": ["F28"],
+    "latex": "x\\quad\\text{if }x>0"
+  },
+  {
+    "id": "math-sizes",
+    "features": ["F29"],
+    "latex": "{\\small x}+{\\displaystyle\\frac{a}{b}}"
+  },
+  {
+    "id": "font-variants",
+    "features": ["F30"],
+    "latex": "\\mathsf{x}+\\mathtt{y}+\\mathfrak{g}"
+  },
+  {
+    "id": "color-and-background",
+    "features": ["F31"],
+    "latex": "\\textcolor{red}{x}+\\colorbox{yellow}{y}"
+  },
+  {
+    "id": "explicit-spacing",
+    "features": ["F32"],
+    "latex": "a\\,b\\quad c\\!d"
+  },
+  {
+    "id": "baseline-adjustment",
+    "features": ["F33"],
+    "latex": "x+\\raisebox{0.5em}{y}"
+  }
+]

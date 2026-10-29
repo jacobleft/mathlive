@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MathLive — Equation workbench</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="workbench.css" />
+    <script type="module" src="workbench.js"></script>
+  </head>
+  <body>
+    <header class="app-header">
+      <a class="brand" href="./" aria-label="MathLive workbench home">
+        <span class="brand-mark" aria-hidden="true">∑</span>
+        <span>MathLive <span class="brand-section">/ Authoring</span></span>
+      </a>
+      <span class="stage">Equation workbench</span>
+    </header>
+    <main>
+      <div class="document-heading">
+        <div>
+          <p class="eyebrow">WORKSPACE 01</p>
+          <h1>Untitled equation</h1>
+        </div>
+        <span class="document-status" role="status" id="editor-status"
+          >Loading editor…</span
+        >
+      </div>
+      <section class="editor" aria-label="Equation editor">
+        <div class="toolbar" role="group" aria-label="Editing controls">
+          <button type="button" id="undo" disabled>Undo</button>
+          <button type="button" id="redo" disabled>Redo</button>
+          <span class="toolbar-divider" aria-hidden="true"></span>
+          <button type="button" id="keyboard" aria-pressed="false" disabled>
+            Math keyboard
+          </button>
+          <span class="toolbar-mode">Display math</span>
+        </div>
+        <div class="equation-paper">
+          <span class="paper-label" aria-hidden="true">01</span>
+          <math-field
+            id="authoring-mathfield"
+            aria-label="Equation"
+            default-mode="math"
+            math-virtual-keyboard-policy="manual"
+          ></math-field>
+          <p class="canvas-hint" id="canvas-hint">
+            Click here and start typing your equation.
+          </p>
+        </div>
+        <footer class="editor-footer">
+          <span>Tab moves between slots</span>
+          <span>Arrow keys navigate the equation</span>
+        </footer>
+      </section>
+      <p class="workspace-note">
+        Your equation stays in this browser tab. Saving and template tools will
+        follow.
+      </p>
+      <noscript>Enable JavaScript to edit an equation.</noscript>
+    </main>
+  </body>
+</html>

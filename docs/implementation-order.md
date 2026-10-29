@@ -1,6 +1,7 @@
 # Feature priorities and implementation order
 
-Status: planned. Updated 2026-10-29.
+Status: S00 implemented; verification and known limitations are recorded in the
+[baseline report](baseline.md). S01–S19 are planned. Updated 2026-10-29.
 
 This document is the execution order for the
 [development plan](development-plan.md). Its slices cross feature families so
@@ -130,12 +131,13 @@ math alphabets and mixed styles arrive in S13. The within-family table and slice
 queue define these increments. First delivery does not mean the whole row is
 complete.
 
-No slice has been implemented by this planning update. No runtime test pass or
-feature-completion percentage is implied by the priorities.
+S00 now has an initial workbench and measured baseline; see the
+[baseline report](baseline.md). S01–S19 remain unimplemented. No complete-feature
+coverage percentage is implied by the notation smoke checks.
 
 ## Current next action
 
-Start **S00**, then **S01**. The first visible authoring delivery is **S02–S04**:
+Start **S01** after the S00 baseline. The first template/property delivery is **S02–S04**:
 create common structures, select them, and change them through contextual
 controls with content-preserving undo/redo. Advance through **S05–S08** to
 include everyday matrix, alignment, and typography workflows before expanding

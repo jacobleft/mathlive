@@ -1,6 +1,7 @@
 # Development plan: a full-featured visual equation editor
 
-Status: planned, with the GitHub fork and planning documents established.
+Status: S00 implemented with an initial workbench and verification baseline;
+see [measured results and remaining gaps](baseline.md). Later slices are planned.
 Date: 2026-10-29.
 Upstream baseline: MathLive 0.111.1 at
 `8d148b4227ca057fa1aefe89c2149cdcf0591443`.
@@ -65,17 +66,17 @@ Source inspection establishes the following available machinery:
 - Existing tests include serialization, rendering, public declarations,
   security, and Playwright interaction tests for Chromium, Firefox, and WebKit.
 
-No downstream feature or baseline test run is claimed complete by this planning
-commit. See the [feature matrix](feature-matrix.md) for evidence levels.
+The [S00 baseline report](baseline.md) records the implemented workbench,
+test-runner fixes, measured tests, and remaining failures. See the
+[feature matrix](feature-matrix.md) for evidence levels.
 
-Two baseline concerns need explicit work in M0:
+Two baseline concerns identified during planning have been addressed in S00:
 
-- The current GitHub workflows target `main`/`master`, so they will not validate
-  pushes to the new `development` branch without configuration changes.
+- GitHub workflows now also target `development`.
 - [scripts/test.sh](../scripts/test.sh) accumulates a failure in `exit_code` but
   finishes with a production rebuild without explicitly returning that code.
-  Verify and correct failure propagation before treating this command as a CI
-  acceptance signal. Validate the correction with an intentional failing test.
+  S00 adds the explicit exit and a regression that first reproduced the false
+  success, then passed after the correction.
 
 ## Editor design
 
@@ -299,8 +300,9 @@ reopen, and composition checks are included in P0. They do not wait for the
 completion of all structure or matrix variants. Every new action includes its
 selection, focus, content-preservation, and undo/redo verification.
 
-All tiers remain in scope. These tasks are planned, not implemented. No schedule
-estimate is committed before the baseline and gap inventory are measured.
+All tiers remain in scope. S00 is implemented with the limitations documented in
+the baseline report; S01–S19 are planned. No schedule estimate is committed for
+the remaining work without measuring the relevant gaps.
 
 ## Fork maintenance
 

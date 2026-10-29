@@ -7,7 +7,10 @@ This is the initial target inventory for an AxMath-style full-featured visual
 editor. It is not an exhaustive inventory of AxMath and does not claim feature
 parity. M0 will compare the inventory against an authorized reference catalog and
 add missing capabilities. All authoring interactions below still need runtime
-verification in this fork.
+verification in this fork beyond the narrow S00 checks in the
+[baseline report](baseline.md). Those checks establish syntax/render/reopen
+smoke evidence for 26 expressions and basic workbench input/history/keyboard
+behavior; they do not complete the feature rows below.
 
 Priorities and execution order are defined in
 [implementation order](implementation-order.md). **First delivery** identifies
@@ -101,8 +104,9 @@ and checks for clipboard and reopen. Store the baseline commit and runtime with
 the results. Use explicit `pass`, `fail`, `not tested`, or `not applicable` for
 each dimension, with an explanation for `not applicable`.
 
-No aggregate coverage percentage is available yet. No row in this initial matrix
-is marked as interaction-tested or completed.
+No aggregate coverage percentage is available yet. No complete feature row is
+marked finished. See the baseline report for measured smoke checks and known
+`prescript`/horizontal-matrix-rule gaps.
 
 ## Deferred scope
 

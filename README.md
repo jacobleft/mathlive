@@ -3,9 +3,23 @@
 > authoring capabilities. See the [development plan](docs/development-plan.md),
 > [priorities and implementation order](docs/implementation-order.md), and
 > [feature matrix](docs/feature-matrix.md).
-> The current changes are planning documents; the editor implementation is still
-> the upstream baseline. MathML storage and macOS/LibreOffice integration are
-> deferred. Upstream: [arnog/mathlive](https://github.com/arnog/mathlive).
+> The first workbench and baseline checks are implemented in S00; template and
+> contextual editing work follows next. See the [baseline report](docs/baseline.md).
+> MathML storage and macOS/LibreOffice integration are deferred.
+> Upstream: [arnog/mathlive](https://github.com/arnog/mathlive).
+
+### Run the equation workbench
+
+```sh
+npm ci
+npm start
+```
+
+Open [the local workbench](http://127.0.0.1:9029/examples/authoring/).
+It currently provides an editable equation canvas, undo/redo controls, and the
+math keyboard. Equations stay in the browser tab; file saving and advanced
+authoring controls are not implemented yet. On Windows, put Git Bash before the
+WSL launcher on `PATH` when using the existing npm scripts.
 
 <div align="center">
     <img alt="MathLive" src="assets/mathlive-1.png?raw=true">

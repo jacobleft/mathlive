@@ -1,0 +1,204 @@
+:root {
+  color-scheme: light;
+  --ink: #26353b;
+  --muted: #687579;
+  --line: #d8dfdf;
+  --accent: #ad4c2b;
+  font-family: 'Trebuchet MS', sans-serif;
+  color: var(--ink);
+  background: #f1f3f1;
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 72px;
+  padding: 12px 36px;
+  background: #263b43;
+  color: #f4f5ee;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  color: inherit;
+  text-decoration: none;
+}
+.brand-mark {
+  font:
+    30px Georgia,
+    serif;
+  color: #efb59b;
+}
+.brand-section {
+  color: #b9c8ca;
+  margin-left: 5px;
+  font-size: 14px;
+}
+.stage {
+  font-size: 12px;
+  color: #b9c8ca;
+}
+main {
+  width: min(1080px, calc(100% - 64px));
+  margin: 54px auto;
+}
+.document-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 23px;
+}
+.eyebrow {
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 1.7px;
+  margin: 0 0 10px;
+}
+h1 {
+  font:
+    normal 29px Georgia,
+    serif;
+  margin: 0;
+}
+.document-status {
+  color: var(--muted);
+  font-size: 12px;
+}
+.editor {
+  border: 1px solid #cbd5d5;
+  background: white;
+  box-shadow: 0 12px 30px #263b4308;
+}
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 9px 13px;
+  border-bottom: 1px solid var(--line);
+  background: #fafbf9;
+}
+button {
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--ink);
+  padding: 8px 11px;
+  border-radius: 3px;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+button:hover:not(:disabled) {
+  border-color: #cbd5d5;
+  background: #edf2f1;
+}
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+button:disabled {
+  color: #9ba6a8;
+  cursor: default;
+}
+button[aria-pressed='true'] {
+  background: #e3ece9;
+}
+.toolbar-divider {
+  height: 18px;
+  border-left: 1px solid var(--line);
+  margin: 0 8px;
+}
+.toolbar-mode {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--muted);
+}
+.equation-paper {
+  min-height: 300px;
+  padding: 65px 56px 50px;
+  position: relative;
+}
+.paper-label {
+  position: absolute;
+  top: 27px;
+  left: 24px;
+  color: #a4adad;
+  font:
+    11px Georgia,
+    serif;
+}
+math-field {
+  display: block;
+  width: 100%;
+  min-height: 74px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font-size: 30px;
+  --caret-color: var(--accent);
+  --selection-background-color: #d5e7e0;
+}
+math-field:focus-within {
+  outline: 1px solid #dae5e1;
+  outline-offset: 8px;
+}
+math-field::part(menu-toggle),
+math-field::part(virtual-keyboard-toggle) {
+  display: none;
+}
+.canvas-hint {
+  color: var(--muted);
+  font-size: 12px;
+  margin: 18px 0 0;
+}
+.canvas-hint[hidden] {
+  display: none;
+}
+.editor-footer {
+  display: flex;
+  gap: 24px;
+  border-top: 1px solid #e9edeb;
+  padding: 13px 20px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.workspace-note {
+  color: var(--muted);
+  font-size: 11px;
+  margin: 18px 0;
+}
+@media (max-width: 600px) {
+  .app-header {
+    padding: 12px 18px;
+  }
+  .stage {
+    display: none;
+  }
+  main {
+    width: calc(100% - 28px);
+    margin: 30px auto;
+  }
+  h1 {
+    font-size: 25px;
+  }
+  .equation-paper {
+    padding: 60px 20px 35px;
+  }
+  .editor-footer {
+    flex-wrap: wrap;
+    gap: 8px 20px;
+  }
+  .toolbar-mode {
+    display: none;
+  }
+}
