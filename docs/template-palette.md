@@ -87,6 +87,15 @@ packaged public declaration check pass. New files pass lint; the modified
 upstream keyboard file retains one existing unused-import warning. The build
 retains eight existing documentation warnings.
 
+The
+[full GitHub workflow](https://github.com/jacobleft/mathlive/actions/runs/40820986138)
+passed on Node.js 22/Linux for code commit
+`a2b49bc69fdb020cff10600de4294de930f3a4aa`: 434 unit tests, 256 snapshots, the
+public declaration check, and 441 browser tests passed. All 45 S02 browser
+checks passed across Chromium, Firefox and WebKit, including the category loops
+over every template. Twelve existing browser skips and two unit TODO remain. The
+final production rebuild also succeeded.
+
 Reproduce with:
 
 ```sh
