@@ -66,7 +66,9 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'npm run start',
+    // The build/type checks run before this server. Starting the server directly
+    // avoids orphaning bash/npm/tsc-watch children during browser-test teardown.
+    command: 'node ./scripts/start.js',
     url: baseURL,
     reuseExistingServer: true,
   },

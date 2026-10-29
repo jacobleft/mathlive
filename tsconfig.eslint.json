@@ -1,5 +1,9 @@
 {
   "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "noEmit": true
+  },
   "include": [
     "./src",
     "./test",
@@ -9,5 +13,13 @@
     "**/*.test.ts",
     "**/*.spec.ts",
     "**/*.less"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "coverage",
+    "declarations",
+    "temp-docs"
   ]
 }

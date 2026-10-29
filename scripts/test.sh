@@ -65,3 +65,6 @@ fi
 # This is so that npm run dist (which runs test) end up with a clean build
 # 
 npm run build production
+
+# Preserve a failed test stage even when the cleanup rebuild succeeds.
+exit "$exit_code"
