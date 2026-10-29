@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>MathLive — Equation workbench</title>
     <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="../../dist/mathlive-static.css" />
     <link rel="stylesheet" href="workbench.css" />
     <script type="module" src="workbench.js"></script>
   </head>
@@ -40,6 +41,49 @@
           </button>
           <span class="toolbar-mode">Display math</span>
         </div>
+        <section
+          class="template-palette"
+          id="template-palette"
+          aria-label="Template palette"
+        >
+          <div class="palette-heading">
+            <h2>Templates</h2>
+            <label class="template-search">
+              <span class="visually-hidden">Search templates</span>
+              <input
+                type="search"
+                placeholder="Search templates"
+                autocomplete="off"
+                spellcheck="false"
+                aria-controls="template-grid"
+              />
+            </label>
+          </div>
+          <div
+            class="template-categories"
+            role="group"
+            aria-label="Template categories"
+          ></div>
+          <div
+            class="template-grid"
+            id="template-grid"
+            role="toolbar"
+            aria-label="Equation templates"
+          ></div>
+          <p class="template-empty" hidden>
+            No templates match. Try another name or choose All.
+          </p>
+          <div class="palette-footer">
+            <span
+              >Select an expression to wrap it. Tab fills the next slot.</span
+            >
+            <span
+              class="template-count"
+              role="status"
+              aria-live="polite"
+            ></span>
+          </div>
+        </section>
         <div class="equation-paper">
           <span class="paper-label" aria-hidden="true">01</span>
           <math-field
@@ -58,8 +102,8 @@
         </footer>
       </section>
       <p class="workspace-note">
-        Your equation stays in this browser tab. Saving and template tools will
-        follow.
+        Your equation stays in this browser tab. File saving and contextual
+        properties will follow.
       </p>
       <noscript>Enable JavaScript to edit an equation.</noscript>
     </main>

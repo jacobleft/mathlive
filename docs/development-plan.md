@@ -1,8 +1,9 @@
 # Development plan: a full-featured visual equation editor
 
-Status: S00 and S01 implemented with an initial workbench, verification baseline
-and shared editing actions; see the [baseline](baseline.md) and
-[S01 report](editor-actions.md). Later slices are planned.
+Status: S00–S02 implemented with the workbench, shared actions, grouped history
+and a searchable common-template palette; see the [baseline](baseline.md),
+[S01 report](editor-actions.md) and [S02 report](template-palette.md).
+Later slices are planned.
 Date: 2026-10-29.
 Upstream baseline: MathLive 0.111.1 at
 `8d148b4227ca057fa1aefe89c2149cdcf0591443`.

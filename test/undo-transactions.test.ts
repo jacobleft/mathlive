@@ -29,6 +29,20 @@ function fixture() {
   return { model, undo };
 }
 
+test('native edit preparation seeds reset history exactly once', () => {
+  const { model, undo } = fixture();
+  undo.reset();
+  undo.ensureSnapshot();
+  undo.ensureSnapshot();
+  model.state = state('b');
+  undo.snapshot('insert-mord');
+  undo.undo();
+  expect(model.state).toEqual(state('a'));
+  expect(undo.canUndo()).toBe(false);
+  undo.redo();
+  expect(model.state).toEqual(state('b'));
+});
+
 test('internal snapshots become one content-and-selection undo unit', () => {
   const { model, undo } = fixture();
   const before = state('a', 1);

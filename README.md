@@ -3,9 +3,10 @@
 > authoring capabilities. See the [development plan](docs/development-plan.md),
 > [priorities and implementation order](docs/implementation-order.md), and
 > [feature matrix](docs/feature-matrix.md).
-> S00 and S01 provide the workbench, shared actions and grouped undo/redo.
-> See the [baseline](docs/baseline.md) and [S01 report](docs/editor-actions.md).
-> Common templates are next in S02.
+> S00–S02 provide the workbench, shared actions, grouped undo/redo and a
+> searchable gallery of 41 common templates. See the [baseline](docs/baseline.md),
+> [S01 report](docs/editor-actions.md) and [S02 report](docs/template-palette.md).
+> Selection-aware contextual properties are next in S03.
 > MathML storage and macOS/LibreOffice integration are deferred.
 > Upstream: [arnog/mathlive](https://github.com/arnog/mathlive).
 
@@ -18,11 +19,13 @@ npm start
 
 Open [the local workbench](http://127.0.0.1:9029/examples/authoring/).
 It currently provides an editable equation canvas, shared undo/redo and
-copy/cut/paste controls, and the math keyboard. Clipboard buttons require browser
+copy/cut/paste controls, the math keyboard, and a categorized template palette.
+Search by name, command alias or symbol, then choose a preview to insert it.
+Select content first to wrap it in a structure. Clipboard buttons require browser
 permission; system shortcuts remain available. Equations stay in the browser
-tab; file saving and advanced
-authoring controls are not implemented yet. On Windows, put Git Bash before the
-WSL launcher on `PATH` when using the existing npm scripts.
+tab; file saving and contextual properties are not implemented yet.
+On Windows, put Git Bash before the WSL launcher on `PATH` when using the
+existing npm scripts.
 
 <div align="center">
     <img alt="MathLive" src="assets/mathlive-1.png?raw=true">

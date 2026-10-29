@@ -10,8 +10,9 @@ add missing capabilities. Most authoring interactions below still need runtime
 verification beyond the narrow S00 checks in the
 [baseline report](baseline.md). Those checks establish syntax/render/reopen
 smoke evidence for 26 expressions and basic workbench input/history/keyboard
-behavior. [S01](editor-actions.md) adds shared action/history checks. These
-increments do not complete the feature rows below.
+behavior. [S01](editor-actions.md) adds shared action/history checks, and
+[S02](template-palette.md) adds a 41-template gallery and interaction checks.
+These increments do not complete the feature rows below.
 
 Priorities and execution order are defined in
 [implementation order](implementation-order.md). **First delivery** identifies
@@ -34,23 +35,23 @@ must not automatically mark any of those interaction dimensions complete.
 
 | ID | Capability | Baseline evidence | Planned editor work | Milestone | First delivery |
 | --- | --- | --- | --- | --- | --- |
-| F01 | Stacked, inline, and barless fractions | Source: fraction definitions/atoms | Palette; convert selected fraction; retain numerator/denominator | M1–M2 | P0 / S02 |
+| F01 | Stacked, inline, and barless fractions | Runtime: S02 stacked/display/inline fraction insertion, wrapping and history | Barless variants and contextual conversion; retain numerator/denominator | M1–M2 | P0 / S02 |
 | F02 | Fraction bar thickness and generalized fractions | Source: generalized fraction support | Contextual controls; audit supported units and limits | M2 | P1 / S12 |
-| F03 | Square roots and indexed radicals | Source: radical definitions/atoms | Editable degree/body slots; variant changes | M1–M2 | P0 / S02 |
-| F04 | Subscripts, superscripts, and combined scripts | Source: Atom branches and navigation | Selection-aware controls; add/remove/transform slots | M1–M2 | P0 / S02 |
+| F03 | Square roots and indexed radicals | Runtime: S02 square/indexed/cube roots and editable degree/body slots | Contextual variant changes on existing roots | M1–M2 | P0 / S02 |
+| F04 | Subscripts, superscripts, and combined scripts | Runtime: S02 script templates and preceding-operand attachment | Contextual add/remove/transform of existing slots | M1–M2 | P0 / S02 |
 | F05 | Prescripts, tensors, nested and multi-position scripts | Audit | Confirm model coverage; implement missing constructions/actions | M2 | P2 / S16 |
-| F06 | Sums, products, unions, and other large operators | Source: operator definitions | Searchable palette and editable bounds | M1–M2 | P0 / S02 |
-| F07 | Single, double, triple, and contour integrals | Source: operator definitions | Visual variants; retain integrand and bounds | M1–M2 | P0 / S02 |
+| F06 | Sums, products, unions, and other large operators | Runtime: S02 sum/product insertion and history; source supports broader operators | Broader operator catalog and contextual bound changes | M1–M2 | P0 / S02 |
+| F07 | Single, double, triple, and contour integrals | Runtime: S02 single/definite integral templates, four editable slots and history | Multiple/contour variants and contextual changes retaining integrand/bounds | M1–M2 | P0 / S02 |
 | F08 | Directed contour, surface, and volume integrals | Source: symbol/operator definitions; exact variants need audit | Variant chooser and reference comparisons | M2 | P1 / S09 |
 | F09 | Side, above/below, and automatic limit placement | Source: Atom limit-placement properties | Contextual property changes on existing operators | M2 | P0 / S04 |
-| F10 | Named functions and custom operators | Source: operator-name definitions | Searchable functions; editable custom name and placement | M1–M2 | P0 / S02 |
-| F11 | Paired, nested, asymmetric, and middle delimiters | Source: delimiter definitions/atoms | Independent delimiter controls; preserve enclosed content | M2 | P0 / S02 |
+| F10 | Named functions and custom operators | Runtime: S02 seven named-function templates and limit | Custom operator name and placement controls | M1–M2 | P0 / S02 |
+| F11 | Paired, nested, asymmetric, and middle delimiters | Runtime: S02 eight paired-delimiter templates and nested wrapping | Independent delimiter controls; asymmetric/middle variants | M2 | P0 / S02 |
 | F12 | Automatic and explicit delimiter sizing | Source: sizing/delimiter machinery; audit exact variants | Contextual size controls | M2, M4 | P1 / S12 |
 | F13 | Hats, bars, vectors, dots, and other accents | Source: accent definitions | Accent palette; replace/remove without deleting body | M1–M2 | P1 / S09 |
 | F14 | Extensible arrows with labels | Source: extensible notation definitions; audit variants | Upper/lower label slots and direction controls | M2 | P1 / S09 |
 | F15 | Under/over braces, annotations, and stacked expressions | Source: notation definitions; audit interaction coverage | Editable annotation slots and variant controls | M2 | P1 / S09 |
 | F16 | Boxes, cancellation, and enclosures | Source: enclosure definitions | Property controls; serialization and input-validation checks | M2, M4 | P1 / S09 |
-| F17 | Symbol categories, variants, and search | Source: symbol definitions | Search by name/symbol; categorized previews | M1 | P0 / S02 |
+| F17 | Symbol categories, variants, and search | Runtime: S02 categorized rendered previews and 12 basic symbols | Broader symbol/variant catalog and discovery | M1 | P0 / S02 |
 | F18 | Insert matrix with chosen dimensions | Source: matrix model and menu machinery | Dimension picker; predictable initial cell/selection | M1, M3 | P0 / S05 |
 | F19 | Insert/delete matrix rows and columns | Source: public commands | Contextual controls; destructive-change behavior; undo | M3 | P0 / S05 |
 | F20 | Change matrix delimiters/environment | Source: environment command | Retain cells and selection while changing style | M3 | P0 / S05 |
@@ -67,12 +68,12 @@ must not automatically mark any of those interaction dimensions complete.
 | F31 | Foreground/background styling | Source: style interface | Selection-aware color controls; undo/reopen checks | M4 | P1 / S13 |
 | F32 | Explicit spacing and operator spacing | Source: spacing definitions and layout machinery | Visual spacing controls and clear reset behavior | M4 | P1 / S13 |
 | F33 | Fine position, baseline, and annotation adjustments | Audit: representability and persistence | Model/layout extensions only where required | M4 | P2 / S17 |
-| F34 | Selection wrapping and template transformation | Source: insertion and selection interfaces | Retain content, slot order, focus, and history | M1–M2 | P0 / S02 |
+| F34 | Selection wrapping and template transformation | Runtime: S02 fraction/root/bracket wrapping retains content, style, focus and history | Contextual transformations on existing structures | M1–M2 | P0 / S02 |
 | F35 | Keyboard navigation, deletion boundaries, and placeholders | Runtime: S01 nested fraction/root placeholder and deletion checks | Extend regressions across all construction families | M1–M6 | P0 / S01 |
 | F36 | Contextual properties for an existing structure | Audit: read/write coverage varies | Panel follows selection; typed model commands for missing actions | M1–M4 | P0 / S03 |
 | F37 | Undo/redo of every logical visual action | Runtime: S01 transactions, rollback, redo branches and selection restoration | Apply shared undo unit to each later visual action | M1–M6 | P0 / S01 |
 | F38 | Copy/paste and save/reopen of complex equations | Runtime: S01 selected/whole-equation clipboard transport and multirow reopen | External formats, file saving and full property coverage | M5–M6 | P0 / S01 |
-| F39 | Search, favorites, recent templates, and snippets | Build | Catalog filtering and local reusable snippets | M1, M5 | P0 / S02 |
+| F39 | Search, favorites, recent templates, and snippets | Runtime: S02 category/alias/symbol/keyword search across 41 templates | Favorites, recents and reusable snippets | M1, M5 | P0 / S02 |
 | F40 | Custom visual templates with editable slots | Source: macros/template primitives; authoring workflow needs build | Create, preview, name, reuse, and revise templates | M5 | P2 / S18 |
 | F41 | Local equation library with previews | Build | Save/rename/search/open using existing representation | M5 | P2 / S18 |
 | F42 | Keyboard access, focus, and accessibility | Runtime: S01 pointer/keyboard action focus and stale clipboard focus checks | Accessibility audit and complete authoring workflows | M1–M6 | P0 / S01 |

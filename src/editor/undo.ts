@@ -107,6 +107,11 @@ export class UndoManager {
     this.index -= 1;
   }
 
+  /** Seed empty history before a native edit without adding a duplicate step. */
+  ensureSnapshot(): void {
+    if (this.index < 0) this.snapshot();
+  }
+
   /**
    * Push a snapshot of the content and selection of the mathfield onto the
    * undo stack so that it can potentially be reverted to later.

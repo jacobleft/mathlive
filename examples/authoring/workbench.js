@@ -1,4 +1,5 @@
 import { EditorActions } from '../../dist/mathlive.mjs';
+import { mountTemplatePalette } from './template-palette.js';
 
 await window.customElements.whenDefined('math-field');
 
@@ -9,6 +10,7 @@ const keyboard = document.getElementById('keyboard');
 const status = document.getElementById('editor-status');
 const hint = document.getElementById('canvas-hint');
 const actions = new EditorActions(mathfield);
+mountTemplatePalette(document.getElementById('template-palette'), actions);
 
 function updateControls() {
   undo.disabled = !actions.state.canEdit || !actions.state.canUndo;

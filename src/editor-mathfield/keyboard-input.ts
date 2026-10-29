@@ -112,10 +112,14 @@ export function onKeystroke(
     mightProducePrintableCharacter(evt)
   ) {
     mathfield.flushInlineShortcutBuffer();
+    const style = computeInsertStyle(mathfield);
+    // Replacing the slot belongs to the following character insertion. Keep
+    // its selection in the current state rather than recording an empty slot.
+    mathfield.undoManager.ensureSnapshot();
+    mathfield.stopCoalescingUndo();
     // Delete the selected placeholder
     model.deleteAtoms(range(model.selection));
-    // Snapshot this as a placeholder replacement operation
-    mathfield.snapshot('delete');
+    mathfield.defaultStyle = { ...style };
     placeholderReplaced = true;
   }
 
@@ -844,9 +848,7 @@ function insertMathModeChar(mathfield: _Mathfield, c: string): void {
   // non-US keyboards, on which, for example, the '^' key is
   // not mapped to 'Shift-Digit6'.
   const selector:
-    | undefined
-    | SelectorPrivate
-    | [SelectorPrivate, ...unknown[]] = (
+    undefined | SelectorPrivate | [SelectorPrivate, ...unknown[]] = (
     {
       '^': 'moveToSuperscript',
       '_': 'moveToSubscript',
