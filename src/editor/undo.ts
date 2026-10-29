@@ -168,7 +168,13 @@ export class UndoManager {
       this.recording = wasRecording;
     }
 
-    if (contentKey(before) === contentKey(after)) return false;
+    if (contentKey(before) === contentKey(after)) {
+      // Movement creates no undo unit, but typing after it must start a new
+      // one, just as it does after ordinary keyboard navigation.
+      if (JSON.stringify(before.selection) !== JSON.stringify(after.selection))
+        this.stopCoalescing(after.selection);
+      return false;
+    }
     if (!wasRecording) return true;
 
     // Synchronize the current entry with the actual pre-edit selection. The

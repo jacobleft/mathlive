@@ -47,7 +47,8 @@ Shared actions now enclose content commands in this transaction. Native keyboard
 history continues to use the same history stack. Raw callers of `insert()` and
 `executeCommand()` retain their existing behavior; use the transaction for new
 visual editing controls. Selection-only boundary deletion creates no history
-entry and still notifies selection observers.
+entry and still notifies selection observers. It also separates subsequent
+native typing from the prior typing group.
 
 ## Reuse
 
@@ -93,13 +94,13 @@ implementation.
 Local environment: Windows x64, Node.js 26.8.1, npm 11.15.0, Git Bash 5.3.9 and
 Playwright 1.63.0, continuing the S00 toolchain.
 
-| Check                                         | Result                                                                             |
-| --------------------------------------------- | ---------------------------------------------------------------------------------- |
-| Production build                              | Passed; eight existing documentation warnings                                      |
-| Source and packaged public declaration checks | Passed, including the new exported controller/action types and transaction API     |
-| Unit suite                                    | 389 passed, two existing TODO, 256 snapshots passed; eight new history regressions |
-| Lint on changed source/tests                  | Zero errors; three existing warnings in model/mathfield files                      |
-| Workbench viewport                            | Toolbar fits at 390 px with no horizontal page overflow                            |
+| Check                                         | Result                                                                            |
+| --------------------------------------------- | --------------------------------------------------------------------------------- |
+| Production build                              | Passed; eight existing documentation warnings                                     |
+| Source and packaged public declaration checks | Passed, including the new exported controller/action types and transaction API    |
+| Unit suite                                    | 390 passed, two existing TODO, 256 snapshots passed; nine new history regressions |
+| Lint on changed source/tests                  | Zero errors; three existing warnings in model/mathfield files                     |
+| Workbench viewport                            | Toolbar fits at 390 px with no horizontal page overflow                           |
 
 The S01 browser suite against the production build passed all 48 checks: 16
 cases each in Chromium, Firefox and WebKit.

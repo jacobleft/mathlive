@@ -63,6 +63,23 @@ test('adjacent transactions do not coalesce', () => {
   expect(model.state).toEqual(state('a'));
 });
 
+test('selection-only edits separate subsequent native typing without adding history', () => {
+  const { model, undo } = fixture();
+  model.state = state('bc', 2);
+  undo.snapshot('insert-mord');
+  expect(
+    undo.transact(() => {
+      model.state = state('bc', 1);
+    })
+  ).toBe(false);
+  model.state = state('bdc', 2);
+  undo.snapshot('insert-mord');
+  undo.undo();
+  expect(model.state).toEqual(state('bc', 1));
+  undo.undo();
+  expect(model.state).toEqual(state('a'));
+});
+
 test('no-op and failed edits preserve an existing redo branch', () => {
   const { model, undo } = fixture();
   undo.transact(() => {
