@@ -1066,8 +1066,7 @@ export class MathfieldElement extends HTMLElement implements Mathfield {
    * @category Localization
    */
   static get fractionNavigationOrder():
-    | 'numerator-denominator'
-    | 'denominator-numerator' {
+    'numerator-denominator' | 'denominator-numerator' {
     return _MathEnvironment.fractionNavigationOrder;
   }
   static set fractionNavigationOrder(
@@ -1907,6 +1906,19 @@ export class MathfieldElement extends HTMLElement implements Mathfield {
    */
   resetUndo(): void {
     this._mathfield?.resetUndo();
+  }
+
+  /**
+   * Apply synchronous content edits as one undo/redo step. Nested calls join
+   * the enclosing step. On an exception, content, selection and history are
+   * restored. Do not perform asynchronous work or undo/redo in the callback.
+   * Returns false for a read-only selection, a cancelled beforeinput, or an
+   * edit that changes neither content nor editing mode. Selection movement
+   * alone creates no history.
+   * @category Undo
+   */
+  performUndoableEdit(edit: () => void): boolean {
+    return this._mathfield?.performUndoableEdit(edit) ?? false;
   }
 
   /**

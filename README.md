@@ -3,8 +3,9 @@
 > authoring capabilities. See the [development plan](docs/development-plan.md),
 > [priorities and implementation order](docs/implementation-order.md), and
 > [feature matrix](docs/feature-matrix.md).
-> The first workbench and baseline checks are implemented in S00; template and
-> contextual editing work follows next. See the [baseline report](docs/baseline.md).
+> S00 and S01 provide the workbench, shared actions and grouped undo/redo.
+> See the [baseline](docs/baseline.md) and [S01 report](docs/editor-actions.md).
+> Common templates are next in S02.
 > MathML storage and macOS/LibreOffice integration are deferred.
 > Upstream: [arnog/mathlive](https://github.com/arnog/mathlive).
 
@@ -16,8 +17,10 @@ npm start
 ```
 
 Open [the local workbench](http://127.0.0.1:9029/examples/authoring/).
-It currently provides an editable equation canvas, undo/redo controls, and the
-math keyboard. Equations stay in the browser tab; file saving and advanced
+It currently provides an editable equation canvas, shared undo/redo and
+copy/cut/paste controls, and the math keyboard. Clipboard buttons require browser
+permission; system shortcuts remain available. Equations stay in the browser
+tab; file saving and advanced
 authoring controls are not implemented yet. On Windows, put Git Bash before the
 WSL launcher on `PATH` when using the existing npm scripts.
 

@@ -43,6 +43,8 @@ export * from './mathfield-element';
 export * from './mathlive-ssr';
 export * from './virtual-keyboard';
 export * from './math-static-elements';
+export { EditorActions } from './editor-actions';
+export type { AuthoringAction, AuthoringCommand } from './editor-actions';
 
 export declare function renderMathInDocument(
   options?: StaticRenderOptions

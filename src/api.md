@@ -1260,6 +1260,27 @@ Return whether there are undoable items
 
 <MemberCard>
 
+##### MathfieldElement.performUndoableEdit() {#performundoableedit}
+
+```ts
+performUndoableEdit(edit): boolean
+```
+
+Apply synchronous content edits as one undo/redo step. Nested calls join
+the enclosing step. On an exception, content, selection and history are
+restored. Do not perform asynchronous work or undo/redo in the callback.
+Returns false for a read-only selection, a cancelled beforeinput, or an
+edit that changes neither content nor editing mode. Selection movement
+alone creates no history.
+
+###### edit
+
+() => `void`
+
+</MemberCard>
+
+<MemberCard>
+
 ##### MathfieldElement.resetUndo() {#resetundo}
 
 ```ts
@@ -2890,7 +2911,7 @@ Number of arguments (`#1`, etc...) in the macro definition
 
 <MemberCard>
 
-##### MacroDefinition.captureSelection? {#captureselection}
+##### MacroDefinition.captureSelection? {#captureselection-1}
 
 ```ts
 optional captureSelection?: boolean;
@@ -2958,7 +2979,7 @@ The code above will support the following notation:
 
 <MemberCard>
 
-##### MacroPackageDefinition.captureSelection? {#captureselection-1}
+##### MacroPackageDefinition.captureSelection? {#captureselection-2}
 
 ```ts
 optional captureSelection?: boolean;
@@ -6348,6 +6369,118 @@ type Expression = number | string | {} | [Expression, ...Expression[]];
 
 ## Other
 
+### EditorActions {#editoractions}
+
+Shared action semantics for palettes, toolbars and future contextual controls.
+
+#### Extends
+
+- `EventTarget`
+
+<MemberCard>
+
+##### new EditorActions() {#constructor}
+
+<MemberCard>
+
+##### new EditorActions()
+
+```ts
+new EditorActions(mathfield, clipboard): EditorActions
+```
+
+###### mathfield
+
+[`MathfieldElement`](#mathfieldelement)
+
+###### clipboard?
+
+`Pick`\<`Clipboard`, `"readText"` \| `"writeText"`\> = `mathfield.ownerDocument.defaultView.navigator.clipboard`
+
+</MemberCard>
+
+</MemberCard>
+
+<MemberCard>
+
+##### EditorActions.mathfield {#mathfield}
+
+```ts
+readonly mathfield: MathfieldElement;
+```
+
+</MemberCard>
+
+<MemberCard>
+
+##### EditorActions.state {#state}
+
+</MemberCard>
+
+<MemberCard>
+
+##### EditorActions.bind() {#bind}
+
+```ts
+bind(button, action): () => void
+```
+
+Bind a control while retaining pointer and keyboard selection intent.
+
+###### button
+
+`HTMLButtonElement`
+
+###### action
+
+[`AuthoringAction`](#authoringaction)
+
+</MemberCard>
+
+<MemberCard>
+
+##### EditorActions.captureSelection() {#captureselection}
+
+```ts
+captureSelection(): void
+```
+
+</MemberCard>
+
+<MemberCard>
+
+##### EditorActions.dispose() {#dispose}
+
+```ts
+dispose(): void
+```
+
+</MemberCard>
+
+<MemberCard>
+
+##### EditorActions.run() {#run}
+
+```ts
+run(action): Promise<boolean>
+```
+
+###### action
+
+[`AuthoringAction`](#authoringaction)
+
+</MemberCard>
+
+<MemberCard>
+
+##### EditorActions.serialize() {#serialize}
+
+```ts
+serialize(): string
+```
+
+</MemberCard>
+
 ### MathDivElement {#mathdivelement}
 
 `<math-div>` web component for block-level mathematical expressions.
@@ -6375,7 +6508,7 @@ Events
 
 <MemberCard>
 
-##### new MathDivElement() {#constructor}
+##### new MathDivElement() {#constructor-1}
 
 <MemberCard>
 
@@ -6556,7 +6689,7 @@ Events
 
 <MemberCard>
 
-##### new MathSpanElement() {#constructor-2}
+##### new MathSpanElement() {#constructor-3}
 
 <MemberCard>
 
@@ -6707,6 +6840,58 @@ render(): void
 ```
 
 Manually trigger a re-render of the content
+
+</MemberCard>
+
+<MemberCard>
+
+### AuthoringAction {#authoringaction}
+
+```ts
+type AuthoringAction =
+  | {
+  type: "undo";
+ }
+  | {
+  type: "redo";
+ }
+  | {
+  type: "copy";
+ }
+  | {
+  type: "cut";
+ }
+  | {
+  type: "paste";
+ }
+  | {
+  command: AuthoringCommand;
+  type: "command";
+ }
+  | {
+  selectionMode: InsertOptions["selectionMode"];
+  type: "insert" | "replace";
+  value: string;
+};
+```
+
+</MemberCard>
+
+<MemberCard>
+
+### AuthoringCommand {#authoringcommand}
+
+```ts
+type AuthoringCommand =
+  | "deleteBackward"
+  | "deleteForward"
+  | "moveToNextChar"
+  | "moveToPreviousChar"
+  | "moveUp"
+  | "moveDown"
+  | "moveToNextPlaceholder"
+  | "moveToPreviousPlaceholder";
+```
 
 </MemberCard>
 

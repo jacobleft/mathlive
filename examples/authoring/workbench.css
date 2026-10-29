@@ -82,6 +82,7 @@ h1 {
 }
 .toolbar {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 5px;
   padding: 9px 13px;

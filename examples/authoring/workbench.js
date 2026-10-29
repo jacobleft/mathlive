@@ -1,4 +1,4 @@
-import '../../dist/mathlive.mjs';
+import { EditorActions } from '../../dist/mathlive.mjs';
 
 await window.customElements.whenDefined('math-field');
 
@@ -8,23 +8,31 @@ const redo = document.getElementById('redo');
 const keyboard = document.getElementById('keyboard');
 const status = document.getElementById('editor-status');
 const hint = document.getElementById('canvas-hint');
+const actions = new EditorActions(mathfield);
 
 function updateControls() {
-  undo.disabled = !mathfield.canUndo();
-  redo.disabled = !mathfield.canRedo();
+  undo.disabled = !actions.state.canEdit || !actions.state.canUndo;
+  redo.disabled = !actions.state.canEdit || !actions.state.canRedo;
+  document.getElementById('cut').disabled =
+    !actions.state.canEdit || mathfield.selectionIsCollapsed;
+  document.getElementById('paste').disabled =
+    !actions.state.canEdit || actions.state.pending;
   hint.hidden = mathfield.value.length > 0;
 }
 
 for (const [button, command] of [
   [undo, 'undo'],
   [redo, 'redo'],
-]) {
-  button.addEventListener('click', () => {
-    mathfield.executeCommand(command);
-    mathfield.focus();
-    updateControls();
-  });
-}
+  [document.getElementById('copy'), 'copy'],
+  [document.getElementById('cut'), 'cut'],
+  [document.getElementById('paste'), 'paste'],
+])
+  actions.bind(button, { type: command });
+
+actions.addEventListener('state-change', updateControls);
+actions.addEventListener('action-error', (event) => {
+  status.textContent = event.detail;
+});
 
 keyboard.disabled = false;
 keyboard.addEventListener('click', () => {

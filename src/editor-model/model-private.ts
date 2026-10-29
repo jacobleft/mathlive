@@ -91,14 +91,15 @@ export class _Model implements Model {
       silenceNotifications?: boolean;
       type?: 'redo' | 'undo';
     }
-  ): void {
+  ): boolean {
     const wasSuppressing = this.silenceNotifications;
     this.silenceNotifications = options?.silenceNotifications ?? true;
     let changeOption: ContentChangeOptions = {};
     if (options?.type === 'undo') changeOption = { inputType: 'historyUndo' };
     if (options?.type === 'redo') changeOption = { inputType: 'historyRedo' };
     // Restore the content and selection
-    if (this.contentWillChange(changeOption)) {
+    const accepted = this.contentWillChange(changeOption);
+    if (accepted) {
       const didSuppress = this.silenceNotifications;
       this.silenceNotifications = true;
       this.mode = state.mode;
@@ -109,6 +110,7 @@ export class _Model implements Model {
       this.selectionDidChange();
     }
     this.silenceNotifications = wasSuppressing;
+    return accepted;
   }
 
   get atoms(): readonly Atom[] {

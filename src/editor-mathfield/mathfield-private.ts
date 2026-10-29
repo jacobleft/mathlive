@@ -1634,6 +1634,42 @@ If you are using Vue, this may be because you are using the runtime-only build o
     return this.undoManager.canUndo();
   }
 
+  performUndoableEdit(edit: () => void): boolean {
+    if (!this.isSelectionEditable) return false;
+    if (!this.model.contentWillChange({ inputType: 'insertText' }))
+      return false;
+    this.flushInlineShortcutBuffer();
+    const wasSilent = this.model.silenceNotifications;
+    const previousStyle = { ...this.defaultStyle };
+    const previousSelection = JSON.stringify(this.model.selection);
+    this.model.silenceNotifications = true;
+    let changed = false;
+    try {
+      changed = this.undoManager.transact(edit);
+    } catch (error) {
+      this.defaultStyle = previousStyle;
+      throw error;
+    } finally {
+      this.model.silenceNotifications = wasSilent;
+      requestUpdate(this);
+    }
+    if (changed) {
+      this.model.contentDidChange({ inputType: 'insertText' });
+      if (!wasSilent) {
+        this.host?.dispatchEvent(
+          new CustomEvent('undo-state-change', {
+            bubbles: true,
+            composed: true,
+            detail: { type: 'snapshot' },
+          })
+        );
+      }
+    }
+    if (changed || previousSelection !== JSON.stringify(this.model.selection))
+      this.model.selectionDidChange();
+    return changed;
+  }
+
   canRedo(): boolean {
     return this.undoManager.canRedo();
   }

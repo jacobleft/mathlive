@@ -7,7 +7,9 @@ export class UndoManager {
   // Maximum number of undo/redo states
   static readonly maximumDepth = 1000;
 
-  private model: _Model;
+  private model: Pick<_Model, 'getState' | 'setState'>;
+
+  private transactionDepth = 0;
 
   private recording = false;
 
@@ -25,7 +27,7 @@ export class UndoManager {
   // one.
   lastOp: string;
 
-  constructor(model: _Model) {
+  constructor(model: Pick<_Model, 'getState' | 'setState'>) {
     this.model = model;
     this.reset();
   }
@@ -56,32 +58,45 @@ export class UndoManager {
    * changes
    */
   stopCoalescing(selection?: Selection): void {
+    if (this.transactionDepth) return;
     if (selection && this.index >= 0)
       this.stack[this.index].selection = selection;
     this.lastOp = '';
   }
 
   undo(): boolean {
+    if (this.transactionDepth)
+      throw new Error('Cannot undo inside an edit transaction.');
     if (!this.canUndo()) return false;
 
     const state = this.stack[this.index - 1];
 
     this.index -= 1;
+    if (
+      !this.model.setState(state, { silenceNotifications: false, type: 'undo' })
+    ) {
+      this.index += 1;
+      return false;
+    }
     this.lastOp = '';
-
-    this.model.setState(state, { silenceNotifications: false, type: 'undo' });
 
     return true;
   }
 
   redo(): boolean {
+    if (this.transactionDepth)
+      throw new Error('Cannot redo inside an edit transaction.');
     if (!this.canRedo()) return false;
 
     const state = this.stack[this.index + 1];
     this.index += 1;
+    if (
+      !this.model.setState(state, { silenceNotifications: false, type: 'redo' })
+    ) {
+      this.index -= 1;
+      return false;
+    }
     this.lastOp = '';
-
-    this.model.setState(state, { silenceNotifications: false, type: 'redo' });
 
     return true;
   }
@@ -99,7 +114,7 @@ export class UndoManager {
    * **Return** `true` if the undo state changed
    */
   snapshot(op?: string): boolean {
-    if (!this.recording) return false;
+    if (!this.recording || this.transactionDepth) return false;
 
     if (op && op === this.lastOp) this.pop();
 
@@ -120,6 +135,57 @@ export class UndoManager {
 
     this.lastOp = op ?? '';
 
+    return true;
+  }
+
+  /** Record synchronous model changes as one undo unit, including selection. */
+  transact(edit: () => void): boolean {
+    const before = this.model.getState();
+    const contentKey = (state: ModelState) =>
+      JSON.stringify([state.content, state.mode]);
+    if (this.transactionDepth) {
+      edit();
+      return contentKey(before) !== contentKey(this.model.getState());
+    }
+
+    const savedStack = this.stack.slice();
+    const savedIndex = this.index;
+    const savedOp = this.lastOp;
+    const wasRecording = this.recording;
+    this.transactionDepth++;
+    let after: ModelState;
+    try {
+      edit();
+      after = this.model.getState();
+    } catch (error) {
+      this.model.setState(before, { silenceNotifications: true });
+      throw error;
+    } finally {
+      this.transactionDepth--;
+      this.stack = savedStack;
+      this.index = savedIndex;
+      this.lastOp = savedOp;
+      this.recording = wasRecording;
+    }
+
+    if (contentKey(before) === contentKey(after)) return false;
+    if (!wasRecording) return true;
+
+    // Synchronize the current entry with the actual pre-edit selection. The
+    // edit may contain commands that snapshot before or after their mutation;
+    // those internal snapshots are suppressed above.
+    if (this.index < 0) {
+      this.stack.push(before);
+      this.index = 0;
+    } else this.stack[this.index] = before;
+    this.stack.splice(this.index + 1);
+    this.stack.push(after);
+    this.index++;
+    if (this.stack.length > UndoManager.maximumDepth) {
+      this.stack.shift();
+      this.index--;
+    }
+    this.lastOp = '';
     return true;
   }
 }
