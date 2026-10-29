@@ -37,6 +37,11 @@ export { setKeyboardLayoutLocale, setKeyboardLayout } from './keyboard-layout';
 
 export * from './commands';
 export * from './core-types';
+export type {
+  SelectionContext,
+  StructureContext,
+  StructureSlot,
+} from './selection-context';
 export * from './options';
 export * from './mathfield';
 export * from './mathfield-element';

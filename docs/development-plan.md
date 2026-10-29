@@ -1,8 +1,9 @@
 # Development plan: a full-featured visual equation editor
 
-Status: S00–S02 implemented with the workbench, shared actions, grouped history
-and a searchable common-template palette; see the [baseline](baseline.md),
-[S01 report](editor-actions.md) and [S02 report](template-palette.md).
+Status: S00–S03 implemented with the workbench, shared actions, template palette
+and selection-aware property inspector; see the [baseline](baseline.md),
+[S01](editor-actions.md), [S02](template-palette.md) and
+[S03](contextual-properties.md) reports.
 Later slices are planned.
 Date: 2026-10-29.
 Upstream baseline: MathLive 0.111.1 at

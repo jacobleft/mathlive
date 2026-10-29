@@ -3,10 +3,11 @@
 > authoring capabilities. See the [development plan](docs/development-plan.md),
 > [priorities and implementation order](docs/implementation-order.md), and
 > [feature matrix](docs/feature-matrix.md).
-> S00–S02 provide the workbench, shared actions, grouped undo/redo and a
-> searchable gallery of 41 common templates. See the [baseline](docs/baseline.md),
-> [S01 report](docs/editor-actions.md) and [S02 report](docs/template-palette.md).
-> Selection-aware contextual properties are next in S03.
+> S00–S03 provide shared editing actions, grouped undo/redo, a searchable gallery
+> of 41 templates and a selection-aware property inspector. See the
+> [baseline](docs/baseline.md), [S01](docs/editor-actions.md),
+> [S02](docs/template-palette.md) and [S03](docs/contextual-properties.md) reports.
+> Common property changes and transformations are next in S04.
 > MathML storage and macOS/LibreOffice integration are deferred.
 > Upstream: [arnog/mathlive](https://github.com/arnog/mathlive).
 
@@ -23,7 +24,8 @@ copy/cut/paste controls, the math keyboard, and a categorized template palette.
 Search by name, command alias or symbol, then choose a preview to insert it.
 Select content first to wrap it in a structure. Clipboard buttons require browser
 permission; system shortcuts remain available. Equations stay in the browser
-tab; file saving and contextual properties are not implemented yet.
+tab. The Properties panel inspects an existing structure and selects its slots;
+property changes and file saving are later increments.
 On Windows, put Git Bash before the WSL launcher on `PATH` when using the
 existing npm scripts.
 

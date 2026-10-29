@@ -84,6 +84,11 @@ command; Copy returns false because it does not edit content. The optional
 clipboard dependency allows deterministic transport tests without changing the
 real equation editor or history implementation.
 
+[S03](contextual-properties.md) adds `select` and `focus` actions for explicit
+selection navigation and bookmark restoration. Selection moves use native
+navigation bookkeeping and create no content undo unit. Hosts may await the
+native asynchronous focus transition before treating DOM focus as restored.
+
 The controller lives in `src/public` so its declaration and types ship with the
 existing public declaration build. It has no private model imports. The only
 engine-facing addition is `performUndoableEdit()` and its history

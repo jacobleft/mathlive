@@ -1,5 +1,6 @@
 import { EditorActions } from '../../dist/mathlive.mjs';
 import { mountTemplatePalette } from './template-palette.js';
+import { mountContextualProperties } from './contextual-properties.js';
 
 await window.customElements.whenDefined('math-field');
 
@@ -11,6 +12,10 @@ const status = document.getElementById('editor-status');
 const hint = document.getElementById('canvas-hint');
 const actions = new EditorActions(mathfield);
 mountTemplatePalette(document.getElementById('template-palette'), actions);
+mountContextualProperties(
+  document.getElementById('contextual-properties'),
+  actions
+);
 
 function updateControls() {
   undo.disabled = !actions.state.canEdit || !actions.state.canUndo;

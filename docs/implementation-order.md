@@ -1,8 +1,9 @@
 # Feature priorities and implementation order
 
-Status: S00–S02 implemented; see the [baseline](baseline.md),
-[shared actions](editor-actions.md) and [template palette](template-palette.md).
-S03–S19 are planned. Updated 2026-10-29.
+Status: S00–S03 implemented; see the [baseline](baseline.md),
+[shared actions](editor-actions.md), [template palette](template-palette.md) and
+[contextual properties](contextual-properties.md). S04–S19 are planned.
+Updated 2026-10-29.
 
 This document is the execution order for the
 [development plan](development-plan.md). Its slices cross feature families so
@@ -134,14 +135,15 @@ complete.
 
 S00 has an initial workbench and measured baseline; S01 adds shared editing
 actions, selection/focus preservation and grouped history. S02 adds the common
-template palette and category/search workflows. S03–S19 remain unimplemented.
+template palette and category/search workflows. S03 adds the property inspector,
+native target snapshots and slot navigation. S04–S19 remain unimplemented.
 No complete-feature coverage percentage is implied by these increments.
 
 ## Current next action
 
-Start **S03**, the selection-aware contextual panel, on top of S02's templates
-and S01's shared actions. Continue to **S04** for common property changes and
-transformations with content-preserving undo/redo. Advance through **S05–S08** to
+Start **S04**: common property changes and transformations using S03's target
+snapshots and S01's shared actions, with content-preserving undo/redo.
+Advance through **S05–S08** to
 include everyday matrix, alignment, and typography workflows before expanding
 advanced notation.
 

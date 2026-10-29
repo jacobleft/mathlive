@@ -3,7 +3,7 @@ import type { _Mathfield } from './mathfield-private';
 import { onInput } from './keyboard-input';
 import { toggleKeystrokeCaption } from './keystroke-caption';
 import { requestUpdate } from './render';
-import { ParseMode } from '../public/core-types';
+import { ParseMode, Selection } from '../public/core-types';
 import { updateAutocomplete } from './autocomplete';
 
 // Commands that don't change content
@@ -41,6 +41,14 @@ registerCommand({
     return true;
   },
 });
+
+registerCommand(
+  {
+    setSelection: (mathfield: _Mathfield, selection: Selection) =>
+      mathfield.model.setSelection(selection),
+  },
+  { target: 'mathfield', changeSelection: true }
+);
 
 // Commands that change content (and affect undo/redo history)
 registerCommand(
@@ -139,13 +147,11 @@ registerCommand(
       // copying it.
       if (mathfield.model.selectionIsCollapsed) mathfield.select();
 
-      if (
-        !(
-          'queryCommandSupported' in document &&
-          document.queryCommandSupported('copy') &&
-          document.execCommand('copy')
-        )
-      ) {
+      if (!(
+        'queryCommandSupported' in document &&
+        document.queryCommandSupported('copy') &&
+        document.execCommand('copy')
+      )) {
         mathfield.element!.querySelector('.ML__keyboard-sink')!.dispatchEvent(
           new ClipboardEvent('copy', {
             bubbles: true,
@@ -164,13 +170,11 @@ registerCommand(
     cutToClipboard: (mathfield: _Mathfield) => {
       mathfield.focus();
 
-      if (
-        !(
-          'queryCommandSupported' in document &&
-          document.queryCommandSupported('cut') &&
-          document.execCommand('cut')
-        )
-      ) {
+      if (!(
+        'queryCommandSupported' in document &&
+        document.queryCommandSupported('cut') &&
+        document.execCommand('cut')
+      )) {
         mathfield.element!.querySelector('.ML__keyboard-sink')!.dispatchEvent(
           new ClipboardEvent('cut', {
             bubbles: true,

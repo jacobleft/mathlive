@@ -417,6 +417,21 @@ sibling is favored.
 
 <MemberCard>
 
+##### MathfieldElement.getSelectionContext() {#getselectioncontext}
+
+```ts
+getSelectionContext(): SelectionContext
+```
+
+Inspect the structures containing the current selection, from inner to
+outer, without changing content, selection, focus or history. Returned
+objects are detached snapshots; refresh them after a content/selection
+change. No private model objects are exposed.
+
+</MemberCard>
+
+<MemberCard>
+
 ##### MathfieldElement.select() {#select}
 
 ```ts
@@ -3533,6 +3548,19 @@ selectAll: (model) => boolean;
 ```ts
 selectGroup: (model) => boolean;
 ```
+
+</MemberCard>
+
+<MemberCard>
+
+##### Commands.setSelection {#setselection}
+
+```ts
+setSelection: (mathfield, selection) => boolean;
+```
+
+Set an explicit selection using native navigation bookkeeping. This
+separates subsequent typing from the previous undo group.
 
 </MemberCard>
 
@@ -6865,6 +6893,13 @@ type AuthoringAction =
   type: "paste";
  }
   | {
+  type: "focus";
+ }
+  | {
+  selection: Selection;
+  type: "select";
+ }
+  | {
   command: AuthoringCommand;
   type: "command";
  }
@@ -6985,6 +7020,53 @@ LaTeX global registers override.
 
 <MemberCard>
 
+### SelectionContext {#selectioncontext}
+
+Read-only inspection of the current selection. Structures run from inner to
+outer. An unsupported selection can still have inspectable enclosing
+structures; choosing one must be an explicit user action. No model objects
+or live ranges are exposed.
+
+<MemberCard>
+
+##### SelectionContext.selection {#selection-2}
+
+```ts
+selection: Selection;
+```
+
+</MemberCard>
+
+<MemberCard>
+
+##### SelectionContext.status {#status}
+
+```ts
+status:
+  | "unavailable"
+  | "empty"
+  | "none"
+  | "ambiguous"
+  | "unsupported"
+  | "supported";
+```
+
+</MemberCard>
+
+<MemberCard>
+
+##### SelectionContext.structures {#structures}
+
+```ts
+structures: StructureContext[];
+```
+
+</MemberCard>
+
+</MemberCard>
+
+<MemberCard>
+
 ### StaticElementFormat {#staticelementformat}
 
 ```ts
@@ -6992,6 +7074,97 @@ type StaticElementFormat = "latex" | "ascii-math" | "math-json";
 ```
 
 Format types supported by static elements
+
+</MemberCard>
+
+<MemberCard>
+
+### StructureContext {#structurecontext}
+
+```ts
+type StructureContext = {
+  range: Range;
+  slots: StructureSlot[];
+ } &
+  | {
+  kind: "fraction";
+  properties: {
+     bar: boolean;
+     layout: "auto" | "display" | "inline";
+    };
+ }
+  | {
+  kind: "root";
+  properties: {
+     indexed: boolean;
+    };
+ }
+  | {
+  kind: "scripts";
+  properties: {
+     subscript: boolean;
+     superscript: boolean;
+    };
+ }
+  | {
+  kind: "delimiters";
+  properties: {
+     automaticRight: boolean;
+     left: string;
+     right: string;
+    };
+ }
+  | {
+  kind: "operator";
+  properties: {
+     command: string;
+     lowerLimit: boolean;
+     placement: "auto" | "above-below" | "side";
+     upperLimit: boolean;
+    };
+ }
+  | {
+  kind: "array";
+  properties: {
+     columns: number;
+     environment: string;
+     rows: number;
+    };
+};
+```
+
+Detached structural information. Offsets are valid for the current value only.
+
+</MemberCard>
+
+<MemberCard>
+
+### StructureSlot {#structureslot}
+
+```ts
+type StructureSlot = {
+  range: Range;
+ } &
+  | {
+  role:   | "numerator"
+     | "denominator"
+     | "radicand"
+     | "index"
+     | "body"
+     | "base"
+     | "subscript"
+     | "superscript"
+     | "lower-limit"
+     | "upper-limit";
+ }
+  | {
+  column: number;
+  role: "cell";
+  row: number;
+};
+```
+
+A selectable content slot of a structure. Ranges use mathfield offsets.
 
 </MemberCard>
 

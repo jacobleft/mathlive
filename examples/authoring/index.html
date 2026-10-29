@@ -84,17 +84,48 @@
             ></span>
           </div>
         </section>
-        <div class="equation-paper">
-          <span class="paper-label" aria-hidden="true">01</span>
-          <math-field
-            id="authoring-mathfield"
-            aria-label="Equation"
-            default-mode="math"
-            math-virtual-keyboard-policy="manual"
-          ></math-field>
-          <p class="canvas-hint" id="canvas-hint">
-            Click here and start typing your equation.
-          </p>
+        <div class="equation-workspace">
+          <div class="equation-paper">
+            <span class="paper-label" aria-hidden="true">01</span>
+            <math-field
+              id="authoring-mathfield"
+              aria-label="Equation"
+              default-mode="math"
+              math-virtual-keyboard-policy="manual"
+            ></math-field>
+            <p class="canvas-hint" id="canvas-hint">
+              Click here and start typing your equation.
+            </p>
+          </div>
+          <aside
+            class="contextual-properties"
+            id="contextual-properties"
+            aria-label="Contextual properties"
+          >
+            <h2>Properties</h2>
+            <div
+              class="structure-trail"
+              role="group"
+              aria-label="Containing structures"
+            ></div>
+            <h3 class="structure-name">Equation selection</h3>
+            <div class="structure-preview" aria-hidden="true"></div>
+            <dl class="structure-values" aria-label="Current properties"></dl>
+            <div
+              class="structure-slots"
+              role="group"
+              aria-label="Structure slots"
+            ></div>
+            <p class="structure-message" role="status" aria-live="polite"></p>
+            <div class="structure-actions">
+              <button type="button" data-context-action="select" disabled>
+                Select structure
+              </button>
+              <button type="button" data-context-action="return" disabled>
+                Return to equation
+              </button>
+            </div>
+          </aside>
         </div>
         <footer class="editor-footer">
           <span>Tab moves between slots</span>
@@ -102,8 +133,8 @@
         </footer>
       </section>
       <p class="workspace-note">
-        Your equation stays in this browser tab. File saving and contextual
-        properties will follow.
+        Your equation stays in this browser tab. Select a structure to inspect
+        its properties and content slots.
       </p>
       <noscript>Enable JavaScript to edit an equation.</noscript>
     </main>

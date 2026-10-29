@@ -12,7 +12,8 @@ verification beyond the narrow S00 checks in the
 smoke evidence for 26 expressions and basic workbench input/history/keyboard
 behavior. [S01](editor-actions.md) adds shared action/history checks, and
 [S02](template-palette.md) adds a 41-template gallery and interaction checks.
-These increments do not complete the feature rows below.
+[S03](contextual-properties.md) adds native context snapshots, property inspection
+and slot navigation. These increments do not complete the feature rows below.
 
 Priorities and execution order are defined in
 [implementation order](implementation-order.md). **First delivery** identifies
@@ -70,13 +71,13 @@ must not automatically mark any of those interaction dimensions complete.
 | F33 | Fine position, baseline, and annotation adjustments | Audit: representability and persistence | Model/layout extensions only where required | M4 | P2 / S17 |
 | F34 | Selection wrapping and template transformation | Runtime: S02 fraction/root/bracket wrapping retains content, style, focus and history | Contextual transformations on existing structures | M1–M2 | P0 / S02 |
 | F35 | Keyboard navigation, deletion boundaries, and placeholders | Runtime: S01 nested fraction/root placeholder and deletion checks | Extend regressions across all construction families | M1–M6 | P0 / S01 |
-| F36 | Contextual properties for an existing structure | Audit: read/write coverage varies | Panel follows selection; typed model commands for missing actions | M1–M4 | P0 / S03 |
-| F37 | Undo/redo of every logical visual action | Runtime: S01 transactions, rollback, redo branches and selection restoration | Apply shared undo unit to each later visual action | M1–M6 | P0 / S01 |
+| F36 | Contextual properties for an existing structure | Runtime: S03 native ancestry/properties, inspector, explicit targets and guarded slot navigation | Common property changes in S04; full/mixed property coverage later | M1–M4 | P0 / S03 |
+| F37 | Undo/redo of every logical visual action | Runtime: S01 grouped history; S03 inspection preserves redo and separates slot typing | Apply shared undo unit to later property/transform actions | M1–M6 | P0 / S01 |
 | F38 | Copy/paste and save/reopen of complex equations | Runtime: S01 selected/whole-equation clipboard transport and multirow reopen | External formats, file saving and full property coverage | M5–M6 | P0 / S01 |
 | F39 | Search, favorites, recent templates, and snippets | Runtime: S02 category/alias/symbol/keyword search across 41 templates | Favorites, recents and reusable snippets | M1, M5 | P0 / S02 |
 | F40 | Custom visual templates with editable slots | Source: macros/template primitives; authoring workflow needs build | Create, preview, name, reuse, and revise templates | M5 | P2 / S18 |
 | F41 | Local equation library with previews | Build | Save/rename/search/open using existing representation | M5 | P2 / S18 |
-| F42 | Keyboard access, focus, and accessibility | Runtime: S01 pointer/keyboard action focus and stale clipboard focus checks | Accessibility audit and complete authoring workflows | M1–M6 | P0 / S01 |
+| F42 | Keyboard access, focus, and accessibility | Runtime: S01/S03 pointer/keyboard selection and DOM focus, stale-target/focus guards | Screen-reader audit and complete authoring workflows | M1–M6 | P0 / S01 |
 | F43 | Chinese IME and input-method transitions | Audit | Test available platforms; preserve composition and focus | M6 | P0 / S08 |
 | F44 | Long/nested expression performance and zoom | Source: renderer; performance/zoom behavior needs audit | Measure baseline; set budgets; check caret hit testing | M6 | P0 / S08 |
 

@@ -21,6 +21,8 @@ import type {
   MathfieldOptions,
 } from './options';
 import type { MenuItem } from './ui-menu-types';
+import type { SelectionContext } from './selection-context';
+import { readSelectionContext } from '../editor-mathfield/selection-context';
 
 import {
   get as getOptions,
@@ -1897,6 +1899,17 @@ export class MathfieldElement extends HTMLElement implements Mathfield {
 
   getElementInfo(offset: Offset): ElementInfo | undefined {
     return getElementInfo(this._mathfield, offset);
+  }
+
+  /**
+   * Inspect the structures containing the current selection, from inner to
+   * outer, without changing content, selection, focus or history. Returned
+   * objects are detached snapshots; refresh them after a content/selection
+   * change. No private model objects are exposed.
+   * @category Selection
+   */
+  getSelectionContext(): SelectionContext {
+    return readSelectionContext(this._mathfield?.model.root, this.selection);
   }
 
   /**

@@ -3,6 +3,7 @@ import type { Keys } from './types-utils';
 import type {
   InsertOptions,
   ParseMode,
+  Selection,
   Style,
   TabularEnvironment,
 } from './core-types';
@@ -22,12 +23,7 @@ import type { Mathfield, Model } from './mathfield';
  * @category Speech
  */
 export type SpeechScope =
-  | 'all'
-  | 'selection'
-  | 'left'
-  | 'right'
-  | 'group'
-  | 'parent';
+  'all' | 'selection' | 'left' | 'right' | 'group' | 'parent';
 
 // @revisit: maybe a command attribute instead?
 /**
@@ -246,6 +242,12 @@ export interface Commands {
    * @category Selection
    */
   moveToOpposite: (model: Model) => boolean;
+  /**
+   * Set an explicit selection using native navigation bookkeeping. This
+   * separates subsequent typing from the previous undo group.
+   * @category Selection
+   */
+  setSelection: (mathfield: Mathfield, selection: Selection) => boolean;
   /**
    * @category Selection
    */

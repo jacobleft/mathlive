@@ -17,6 +17,8 @@ export type AuthoringAction =
   | { type: 'copy' }
   | { type: 'cut' }
   | { type: 'paste' }
+  | { type: 'focus' }
+  | { type: 'select'; selection: Selection }
   | { type: 'command'; command: AuthoringCommand }
   | {
       type: 'insert' | 'replace';
@@ -171,10 +173,23 @@ export class EditorActions extends EventTarget {
       action.type === 'command' && !action.command.startsWith('delete');
     if (
       action.type !== 'copy' &&
+      action.type !== 'focus' &&
       !navigation &&
       !this.mathfield.isSelectionEditable
     )
       return false;
+
+    if (action.type === 'focus' || action.type === 'select') {
+      const before = JSON.stringify(this.mathfield.selection);
+      if (action.type === 'select') {
+        this.mathfield.executeCommand([
+          'setSelection',
+          cloneSelection(action.selection),
+        ]);
+      }
+      this.captureSelection();
+      return before !== JSON.stringify(this.mathfield.selection);
+    }
 
     if (action.type === 'undo' || action.type === 'redo') {
       const available =

@@ -680,6 +680,9 @@ export function onInput(
     model.announce('plonk');
     return;
   }
+  // A loaded equation may have had its history reset. Retain its value and
+  // selection before the first native input replaces a selected content slot.
+  mathfield.undoManager.ensureSnapshot();
   options ??= {};
 
   //
