@@ -1,3 +1,11 @@
+> **Development fork:** [jacobleft/mathlive](https://github.com/jacobleft/mathlive)
+> builds toward a full-featured visual equation editor with AxMath-style
+> authoring capabilities. See the [development plan](docs/development-plan.md)
+> and [feature matrix](docs/feature-matrix.md).
+> The current changes are planning documents; the editor implementation is still
+> the upstream baseline. MathML storage and macOS/LibreOffice integration are
+> deferred. Upstream: [arnog/mathlive](https://github.com/arnog/mathlive).
+
 <div align="center">
     <img alt="MathLive" src="assets/mathlive-1.png?raw=true">
 </div>
@@ -5,7 +13,6 @@
 <h1 align="center">MathLive</h1>
 <p align="center"><em>Web components for math input, display, and accessibility.</em></p>
 
-[![Maintenance](https://img.shields.io/maintenance/yes/2025.svg)]()
 [![GitHub license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://raw.githubusercontent.com/arnog/mathlive/master/LICENSE.txt)
 
 MathLive ships batteries-included UI components that bring TeX-quality math to
